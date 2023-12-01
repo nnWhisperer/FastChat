@@ -68,6 +68,12 @@ register_model_info(
     "Claude Instant by Anthropic",
 )
 register_model_info(
+    ["pplx-70b-online", "pplx-7b-online"],
+    "Perplexity Online LLMs",
+    "https://blog.perplexity.ai/blog/introducing-pplx-online-llms",
+    "Online LLM API by Perplexity AI",
+)
+register_model_info(
     ["openhermes-2.5-mistral-7b"],
     "OpenHermes-2.5-Mistral-7B",
     "https://huggingface.co/teknium/OpenHermes-2.5-Mistral-7B",

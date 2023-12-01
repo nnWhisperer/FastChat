@@ -1049,6 +1049,21 @@ class AzureOpenAIAdapter(BaseModelAdapter):
         return get_conv_template("chatgpt")
 
 
+class PplxAIAdapter(BaseModelAdapter):
+    """The model adapter for Perplexity AI"""
+
+    def match(self, model_path: str):
+        return model_path in (
+            "pplx-7b-online",
+            "pplx-70b-online",
+        )
+
+    def load_model(self, model_path: str, from_pretrained_kwargs: dict):
+        raise NotImplementedError()
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("pplxai")
+
 class ClaudeAdapter(BaseModelAdapter):
     """The model adapter for Claude"""
 
@@ -2008,6 +2023,7 @@ register_model_adapter(LemurAdapter)
 register_model_adapter(PygmalionAdapter)
 register_model_adapter(MicrosoftOrcaAdapter)
 register_model_adapter(YiAdapter)
+register_model_adapter(PplxAIAdapter)
 
 # After all adapters, try the default base adapter.
 register_model_adapter(BaseModelAdapter)

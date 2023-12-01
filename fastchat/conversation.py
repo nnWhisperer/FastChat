@@ -658,6 +658,17 @@ register_conv_template(
     )
 )
 
+# Perplexity AI template
+register_conv_template(
+    Conversation(
+        name="pplxai",
+        system_message="Be precise and concise.",
+        roles=("user", "assistant"),
+        sep_style=None,
+        sep=None,
+    )
+)
+
 # Claude default template
 register_conv_template(
     Conversation(

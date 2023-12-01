@@ -168,6 +168,8 @@ SAMPLING_WEIGHTS = {
     "claude-2.0": 2,
     "claude-1": 2,
     "claude-instant-1": 4,
+    "pplx-7b-online": 6,
+    "pplx-70b-online": 6,
     "openhermes-2.5-mistral-7b": 2,
     "wizardlm-70b": 2,
     "starling-lm-7b-alpha": 2,
@@ -221,6 +223,8 @@ BATTLE_TARGETS = {
     "claude-1": {"claude-2.1", "gpt-4", "gpt-3.5-turbo"},
     "claude-instant-1": {"gpt-3.5-turbo-1106", "claude-2.1"},
     "deluxe-chat-v1.1": {"gpt-4", "gpt-4-turbo"},
+    "pplx-7b-online": {"gpt-3.5-turbo", "gpt-3.5-turbo-1106", "llama-2-70b-chat"},
+    "pplx-70b-online": {"gpt-3.5-turbo", "gpt-3.5-turbo-1106", "llama-2-70b-chat"},
     "openhermes-2.5-mistral-7b": {"gpt-3.5-turbo", "openchat-3.5", "zephyr-7b-beta"},
     "starling-lm-7b-alpha": {"gpt-3.5-turbo", "openchat-3.5", "zephyr-7b-beta"},
     "tulu-2-dpo-70b": {"gpt-3.5-turbo", "vicuna-33b", "claude-instant-1"},
@@ -267,6 +271,7 @@ SAMPLING_BOOST_MODELS = [
 OUTAGE_MODELS = [
     "zephyr-7b-alpha",
     "falcon-180b-chat",
+    "deluxe-chat-v1.1",
 ]
 
 
@@ -291,6 +296,8 @@ def get_battle_pair():
     model_weights = model_weights / total_weight
     chosen_idx = np.random.choice(len(models), p=model_weights)
     chosen_model = models[chosen_idx]
+    # for p, w in zip(models, model_weights):
+    #     print(p, w)
 
     rival_models = []
     rival_weights = []

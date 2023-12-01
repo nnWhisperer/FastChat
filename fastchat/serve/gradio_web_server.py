@@ -147,11 +147,9 @@ def get_model_list(
     if add_palm:
         models += ["palm-2"]
     models = list(set(models))
-
-    if "deluxe-chat-v1" in models:
-        del models[models.index("deluxe-chat-v1")]
-    if "deluxe-chat-v1.1" in models:
-        del models[models.index("deluxe-chat-v1.1")]
+    hidden_models = ["deluxe-chat-v1.1", "pplx-7b-online", "pplx-70b-online"]
+    for hm in hidden_models:
+        del models[models.index(hm)]
 
     priority = {k: f"___{i:02d}" for i, k in enumerate(model_info)}
     models.sort(key=lambda x: priority.get(x, x))
