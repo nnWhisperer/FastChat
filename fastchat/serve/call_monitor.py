@@ -8,8 +8,8 @@ import hashlib
 import asyncio
 
 REFRESH_INTERVAL_SEC = 30
-# LOG_DIR = "/home/vicuna/fastchat_logs/server0"
-LOG_DIR = "/home/vicuna/tmp/test_env"
+LOG_DIR = "/home/vicuna/fastchat_logs/server0"
+# LOG_DIR = "/home/vicuna/tmp/test_env"
 
 class Monitor:
     """ Monitor the number of calls to each model. """
