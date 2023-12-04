@@ -69,7 +69,7 @@ register_model_info(
 )
 register_model_info(
     ["pplx-70b-online", "pplx-7b-online"],
-    "Perplexity Online LLMs",
+    "pplx-online-llms",
     "https://blog.perplexity.ai/blog/introducing-pplx-online-llms",
     "Online LLM API by Perplexity AI",
 )

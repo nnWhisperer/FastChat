@@ -168,8 +168,8 @@ SAMPLING_WEIGHTS = {
     "claude-2.0": 2,
     "claude-1": 2,
     "claude-instant-1": 4,
-    "pplx-7b-online": 6,
-    "pplx-70b-online": 6,
+    "pplx-7b-online": 4,
+    "pplx-70b-online": 4,
     "openhermes-2.5-mistral-7b": 2,
     "wizardlm-70b": 2,
     "starling-lm-7b-alpha": 2,
@@ -262,6 +262,8 @@ SAMPLING_BOOST_MODELS = [
     "starling-lm-7b-alpha",
     "openhermes-2.5-mistral-7b",
     "gpt-3.5-turbo-1106",
+    "pplx-7b-online",
+    "pplx-70b-online",
     #"openchat-3.5",
     #"gpt-4-turbo",
     #"claude-1",
@@ -434,6 +436,7 @@ def bot_response_multi(
                 top_p,
                 max_new_tokens,
                 request,
+                apply_rate_limit=False,
             )
         )
 
