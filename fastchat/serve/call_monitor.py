@@ -19,7 +19,7 @@ class Monitor:
         self.model_call = {}
         self.user_call = {}
         self.model_call_limit_global = {"gpt-4-turbo": 1000}
-        self.model_call_day_limit_per_user = {"gpt-4-turbo": 0}
+        self.model_call_day_limit_per_user = {"gpt-4-turbo": 30}
 
     async def update_stats(self, num_file=1) -> None:
         while True:
