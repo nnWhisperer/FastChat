@@ -42,7 +42,7 @@ register_model_info(
 )
 register_model_info(
     ["gpt-4", "gpt-4-0314", "gpt-4-0613"],
-    "GPT-4", "https://openai.com/research/gpt-4", "ChatGPT-4 by OpenAI"
+    "GPT-4", "https://openai.com/research/gpt-4", "GPT-4 by OpenAI"
 )
 register_model_info(
     ["claude-2.1", "claude-2.0"],
@@ -397,21 +397,24 @@ register_model_info(
     "https://github.com/Xwin-LM/Xwin-LM",
     "Chat models developed by Xwin-LM team",
 )
-
 register_model_info(
     ["lemur-70b-chat"],
     "Lemur-Chat",
     "https://huggingface.co/OpenLemur/lemur-70b-chat-v1",
     "an openly accessible language model optimized for both natural language and coding capabilities ",
 )
-
 register_model_info(
     ["Mistral-7B-OpenOrca"],
     "Open-Orca",
     "https://huggingface.co/Open-Orca/Mistral-7B-OpenOrca",
     "A fine-tune of [Mistral 7B](https://huggingface.co/mistralai/Mistral-7B-v0.1) using [OpenOrca dataset](https://huggingface.co/datasets/Open-Orca/OpenOrca)",
 )
-
+register_model_info(
+    ["dolphin-2.2.1-mistral-7b"],
+    "dolphin-mistral",
+    "https://huggingface.co/ehartford/dolphin-2.2.1-mistral-7b",
+    "An uncensored fine-tuned [Mistral 7B](https://huggingface.co/mistralai/Mistral-7B-v0.1)",
+)
 register_model_info(
     [
         "AquilaChat-7B",
@@ -422,4 +425,15 @@ register_model_info(
     "https://huggingface.co/BAAI/AquilaChat2-34B",
     "Chat models developed by BAAI team",
 )
-
+register_model_info(
+    ["xDAN-L1-Chat-v0.1"],
+    "xDAN-L1-Chat",
+    "https://huggingface.co/xDAN-AI/xDAN-L1-Chat-v0.1",
+    "A large language chat model created by xDAN-AI.",
+)
+register_model_info(
+    ["MetaMath-70B-V1.0", "MetaMath-7B-V1.0"],
+    "MetaMath",
+    "https://huggingface.co/meta-math",
+    "MetaMath is a finetune of Llama2 on [MetaMathQA](https://huggingface.co/datasets/meta-math/MetaMathQA) that specializes in mathematical reasoning.",
+)

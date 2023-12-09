@@ -279,7 +279,6 @@ SAMPLING_BOOST_MODELS = [
 OUTAGE_MODELS = [
     "zephyr-7b-alpha",
     "falcon-180b-chat",
-    "tulu-2-dpo-70b",
 ]
 
 
@@ -555,7 +554,6 @@ Find out who is the 🥇LLM Champion!
             interactive=True,
             label="Max output tokens",
         )
-
 
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 

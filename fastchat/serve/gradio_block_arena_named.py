@@ -363,7 +363,6 @@ def build_side_by_side_ui_named(models):
             label="Max output tokens",
         )
 
-
     gr.Markdown(acknowledgment_md, elem_id="ack_markdown")
 
     # Register listeners
