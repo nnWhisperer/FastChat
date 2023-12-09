@@ -7,7 +7,7 @@ from fastapi import FastAPI
 import hashlib
 import asyncio
 
-REFRESH_INTERVAL_SEC = 30
+REFRESH_INTERVAL_SEC = 60
 LOG_DIR = "/home/vicuna/fastchat_logs/server0"
 # LOG_DIR = "/home/vicuna/tmp/test_env"
 
@@ -19,7 +19,7 @@ class Monitor:
         self.model_call = {}
         self.user_call = {}
         self.model_call_limit_global = {"gpt-4-turbo": 1000}
-        self.model_call_day_limit_per_user = {"gpt-4-turbo": 30}
+        self.model_call_day_limit_per_user = {"gpt-4-turbo": 10}
 
     async def update_stats(self, num_file=1) -> None:
         while True:

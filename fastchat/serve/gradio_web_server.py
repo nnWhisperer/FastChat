@@ -142,13 +142,13 @@ def get_model_list(
         models += list(openai_compatible_models_info.keys())
 
     if add_chatgpt:
-        models += ["gpt-3.5-turbo", "gpt-3.5-turbo-1106"]
+        models += ["gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"]
     if add_claude:
         models += ["claude-2.0", "claude-2.1", "claude-instant-1"]
     if add_palm:
         models += ["palm-2"]
     models = list(set(models))
-    hidden_models = ["deluxe-chat-v1.1", "gpt-4"]
+    hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
     for hm in hidden_models:
         del models[models.index(hm)]
 
@@ -375,7 +375,14 @@ def bot_response(state, temperature, top_p, max_new_tokens, request: gr.Request,
             api_base=model_info["api_base"],
             api_key=model_info["api_key"],
         )
-    elif model_name in ["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo-1106"]:
+    elif model_name in ["gpt-3.5-turbo",
+                        "gpt-3.5-turbo-0301",
+                        "gpt-3.5-turbo-0613",
+                        "gpt-3.5-turbo-1106",
+                        "gpt-4",
+                        "gpt-4-0314",
+                        "gpt-4-0613",
+                        "gpt-4-turbo"]:
         # avoid conflict with Azure OpenAI
         assert model_name not in openai_compatible_models_info
         prompt = conv.to_openai_api_messages()

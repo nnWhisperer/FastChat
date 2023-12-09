@@ -29,16 +29,10 @@ def get_model_info(name: str) -> ModelInfo:
 
 
 register_model_info(
-    ["gpt-3.5-turbo"],
+    ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],
     "GPT-3.5",
-    "https://openai.com/blog/chatgpt",
-    "GPT-3.5 by OpenAI",
-)
-register_model_info(
-    ["gpt-3.5-turbo-1106"],
-    "GPT-3.5-Turbo-1106",
     "https://platform.openai.com/docs/models/gpt-3-5",
-    "GPT-3.5-Turbo-1106 by OpenAI",
+    "GPT-3.5-Turbo by OpenAI",
 )
 register_model_info(
     ["gpt-4-turbo"],
@@ -47,7 +41,8 @@ register_model_info(
     "GPT-4-Turbo by OpenAI",
 )
 register_model_info(
-    ["gpt-4"], "GPT-4", "https://openai.com/research/gpt-4", "ChatGPT-4 by OpenAI"
+    ["gpt-4", "gpt-4-0314", "gpt-4-0613"],
+    "GPT-4", "https://openai.com/research/gpt-4", "ChatGPT-4 by OpenAI"
 )
 register_model_info(
     ["claude-2.1", "claude-2.0"],
@@ -385,7 +380,7 @@ register_model_info(
     "StableVicuna is a Vicuna model fine-tuned using RLHF via PPO on various conversational and instructional datasets.",
 )
 register_model_info(
-    ["deluxe-chat-v1", "deluxe-chat-v1.1"],
+    ["deluxe-chat-v1", "deluxe-chat-v1.1", "deluxe-chat-v1.2"],
     "DeluxeChat",
     "",
     "Deluxe Chat",

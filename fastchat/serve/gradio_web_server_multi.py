@@ -95,9 +95,10 @@ def load_demo(url_params, request: gr.Request):
         if args.add_palm:
             models_anony += ["palm-2"]
     anony_only_models = [
-        "deluxe-chat-v1.1",
+        "deluxe-chat-v1.2",
         "claude-1",
-        "gpt-4",
+        "gpt-4-0613",
+        "gpt-4-0314",
     ]
     for mdl in anony_only_models:
         models_anony.append(mdl)
