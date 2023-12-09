@@ -172,6 +172,7 @@ SAMPLING_WEIGHTS = {
     "pplx-7b-online": 4,
     "pplx-70b-online": 4,
     "openhermes-2.5-mistral-7b": 2,
+    "dolphin-2.2.1-mistral-7b": 2,
     "wizardlm-70b": 2,
     "starling-lm-7b-alpha": 2,
     "tulu-2-dpo-70b": 2,
@@ -180,7 +181,7 @@ SAMPLING_WEIGHTS = {
     "openchat-3.5": 2,
     "chatglm3-6b": 2,
     # tier 1
-    "deluxe-chat-v1.2": 2,
+    "deluxe-chat-v1.2": 4,
     "palm-2": 1.5,
     "llama-2-70b-chat": 1.5,
     "llama-2-13b-chat": 1.5,
@@ -264,15 +265,10 @@ SAMPLING_BOOST_MODELS = [
     "claude-2.1",
     "claude-1",
     "gpt-4-0613",
-    # "wizardlm-70b",
-    # "starling-lm-7b-alpha",
-    # "openhermes-2.5-mistral-7b",
     "gpt-3.5-turbo-1106",
-    # "pplx-7b-online",
-    #"pplx-70b-online",
     "gpt-4-0314",
-    #"openchat-3.5",
     #"gpt-4-turbo",
+    "dolphin-2.2.1-mistral-7b",
 ]
 
 # outage models won't be sampled.
