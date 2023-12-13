@@ -36,6 +36,8 @@ def openai_api_stream_iter(
     if model_name == "gpt-4-turbo":
         model_name = "gpt-4-1106-preview"
 
+    if messages[0]["role"] == "system" and messages[0]["content"] == "":
+        messages = messages[1:]
     # Make requests
     gen_params = {
         "model": model_name,

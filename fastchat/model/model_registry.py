@@ -29,6 +29,12 @@ def get_model_info(name: str) -> ModelInfo:
 
 
 register_model_info(
+    ["mixtral-8x7b-instruct-v0.1", "mistral-7b-instruct"],
+    "Mixtral of experts",
+    "https://mistral.ai/news/mixtral-of-experts/",
+    "A high quality Sparse Mixture-of-Experts by Mistral AI team",
+)
+register_model_info(
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],
     "GPT-3.5",
     "https://platform.openai.com/docs/models/gpt-3-5",
@@ -122,12 +128,6 @@ register_model_info(
     "OpenChat 3.5",
     "https://github.com/imoneoi/openchat",
     "an open model fine-tuned on Mistral-7B using C-RLFT",
-)
-register_model_info(
-    ["mistral-7b-instruct"],
-    "Mistral",
-    "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1",
-    "a large language model by Mistral AI team",
 )
 register_model_info(
     ["zephyr-7b-beta", "zephyr-7b-alpha"],

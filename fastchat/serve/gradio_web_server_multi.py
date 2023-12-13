@@ -97,6 +97,9 @@ def load_demo(url_params, request: gr.Request):
     anony_only_models = [
         "deluxe-chat-v1.2",
         "claude-1",
+        "claude-2.0",
+        "claude-2.1",
+        "claude-instant-1",
         "gpt-4-0613",
         "gpt-4-0314",
     ]
