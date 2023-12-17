@@ -27,12 +27,17 @@ def get_model_info(name: str) -> ModelInfo:
             name, "", "Register the description at fastchat/model/model_registry.py"
         )
 
-
 register_model_info(
     ["mixtral-8x7b-instruct-v0.1", "mistral-7b-instruct"],
     "Mixtral of experts",
     "https://mistral.ai/news/mixtral-of-experts/",
     "A high quality Sparse Mixture-of-Experts by Mistral AI team",
+)
+register_model_info(
+    ["gemini-pro"],
+    "Gemini",
+    "https://blog.google/technology/ai/google-gemini-pro-imagen-duet-ai-update/",
+    "Gemini by Google",
 )
 register_model_info(
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],

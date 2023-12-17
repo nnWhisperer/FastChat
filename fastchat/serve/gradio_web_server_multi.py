@@ -93,7 +93,7 @@ def load_demo(url_params, request: gr.Request):
         if args.add_claude:
             models_anony += ["claude-2.1", "claude-2.0", "claude-1", "claude-instant-1"]
         if args.add_palm:
-            models_anony += ["palm-2"]
+            models_anony += ["gemini-pro"]
     anony_only_models = [
         "deluxe-chat-v1.2",
         "claude-1",

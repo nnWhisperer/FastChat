@@ -91,10 +91,8 @@ class State:
         self.skip_next = False
         self.model_name = model_name
 
-        if model_name == "palm-2":
-            # According to release note, "chat-bison@001" is PaLM 2 for chat.
-            # https://cloud.google.com/vertex-ai/docs/release-notes#May_10_2023
-            self.palm_chat = init_palm_chat("chat-bison@001")
+        if model_name in ["palm-2", "gemini-pro"]:
+            self.palm_chat = init_palm_chat(model_name)
 
     def to_gradio_chatbot(self):
         return self.conv.to_gradio_chatbot()
@@ -146,10 +144,9 @@ def get_model_list(
     if add_claude:
         models += ["claude-2.0", "claude-2.1", "claude-instant-1"]
     if add_palm:
-        models += ["palm-2"]
+        models += ["gemini-pro"]
     models = list(set(models))
-    hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613",
-                     "claude-2.0", "claude-2.1", "claude-instant-1"]
+    hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
     for hm in hidden_models:
         del models[models.index(hm)]
 
@@ -395,9 +392,9 @@ def bot_response(state, temperature, top_p, max_new_tokens, request: gr.Request,
         stream_iter = anthropic_api_stream_iter(
             model_name, prompt, temperature, top_p, max_new_tokens
         )
-    elif model_name == "palm-2":
+    elif model_name in ["palm-2", "gemini-pro"]:
         stream_iter = palm_api_stream_iter(
-            state.palm_chat, conv.messages[-2][1], temperature, top_p, max_new_tokens
+            model_name, state.palm_chat, conv.messages[-2][1], temperature, top_p, max_new_tokens
         )
     else:
         # Query worker address
@@ -713,8 +710,8 @@ def build_single_model_ui(models, add_promotion_links=False):
         )
         max_output_tokens = gr.Slider(
             minimum=16,
-            maximum=1024,
-            value=512,
+            maximum=2048,
+            value=1024,
             step=64,
             interactive=True,
             label="Max output tokens",

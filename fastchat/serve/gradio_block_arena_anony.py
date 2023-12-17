@@ -165,10 +165,11 @@ SAMPLING_WEIGHTS = {
     "gpt-4-turbo": 4,
     "gpt-3.5-turbo-0613": 2,
     "gpt-3.5-turbo-1106": 2,
-    "claude-2.1": 2,
+    "claude-2.1": 4,
     "claude-2.0": 2,
     "claude-1": 2,
-    "claude-instant-1": 2,
+    "claude-instant-1": 4,
+    "gemini-pro": 4,
     "pplx-7b-online": 4,
     "pplx-70b-online": 4,
     "mixtral-8x7b-instruct-v0.1": 4,
@@ -228,6 +229,7 @@ BATTLE_TARGETS = {
     "claude-2.0": {"gpt-4-turbo", "gpt-4-0314", "claude-1"},
     "claude-1": {"claude-2.1", "gpt-4-0314", "gpt-3.5-turbo-0613"},
     "claude-instant-1": {"gpt-3.5-turbo-1106", "claude-2.1"},
+    "gemini-pro": {"gpt-4-turbo", "gpt-4-0314", "gpt-3.5-turbo-0613"},
     "deluxe-chat-v1.1": {"gpt-4-0613", "gpt-4-turbo"},
     "deluxe-chat-v1.2": {"gpt-4-0613", "gpt-4-turbo"},
     "pplx-7b-online": {"gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106", "llama-2-70b-chat"},
@@ -266,19 +268,21 @@ SAMPLING_BOOST_MODELS = [
     # "tulu-2-dpo-70b",
     #"yi-34b-chat",
     "claude-2.1",
-    # "claude-1",
-    "gpt-4-0613",
+    "claude-1",
+    # "gpt-4-0613",
     # "gpt-3.5-turbo-1106",
-    "gpt-4-0314",
-    #"gpt-4-turbo",
+    # "gpt-4-0314",
+    "gpt-4-turbo",
     # "dolphin-2.2.1-mistral-7b",
     "mixtral-8x7b-instruct-v0.1",
+    "gemini-pro",
 ]
 
 # outage models won't be sampled.
 OUTAGE_MODELS = [
     "zephyr-7b-alpha",
     "falcon-180b-chat",
+    "palm-2",
 ]
 
 
@@ -548,8 +552,8 @@ Find out who is the 🥇LLM Champion!
         )
         max_output_tokens = gr.Slider(
             minimum=16,
-            maximum=1024,
-            value=512,
+            maximum=2048,
+            value=1024,
             step=64,
             interactive=True,
             label="Max output tokens",
