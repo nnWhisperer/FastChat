@@ -40,6 +40,12 @@ register_model_info(
     "Gemini by Google",
 )
 register_model_info(
+    ["solar-10.7b-instruct-v1.0"],
+    "SOLAR-10.7B-Instruct",
+    "https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0",
+    "A Llama2 developed by upstage ai that incorporates depth up-scaling.",
+)
+register_model_info(
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],
     "GPT-3.5",
     "https://platform.openai.com/docs/models/gpt-3-5",
@@ -441,11 +447,4 @@ register_model_info(
     "MetaMath",
     "https://huggingface.co/meta-math",
     "MetaMath is a finetune of Llama2 on [MetaMathQA](https://huggingface.co/datasets/meta-math/MetaMathQA) that specializes in mathematical reasoning.",
-)
-
-register_model_info(
-    ["upstage/SOLAR-10.7B-Instruct-v1.0"],
-    "SOLAR-10.7B-Instruct",
-    "https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0",
-    "A Llama2 fine-tune developed by upstage.ai that incorporates depth up-scaling.",
 )
