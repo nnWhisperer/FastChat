@@ -239,6 +239,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--leaderboard-table-file", type=str, help="Load leaderboard results and plots"
     )
+    parser.add_argument(
+        "--gradio-root-path",
+        type=str,
+        help="Sets the gradio root path, eg /abc/def. Useful when running behind a reverse-proxy or at a custom URL path prefix",
+    )
     args = parser.parse_args()
     logger.info(f"args: {args}")
 
@@ -278,4 +283,5 @@ if __name__ == "__main__":
         share=args.share,
         max_threads=200,
         auth=auth,
+        root_path=args.gradio_root_path,
     )
