@@ -147,11 +147,12 @@ def get_model_list(
     if add_palm:
         models += ["gemini-pro"]
     models = list(set(models))
-    hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
+    #hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
+    hidden_models = ["gpt-4-0613"]
     for hm in hidden_models:
         del models[models.index(hm)]
 
-    priority = {k: f"___{i:02d}" for i, k in enumerate(model_info)}
+    priority = {k: f"___{i:03d}" for i, k in enumerate(model_info)}
     models.sort(key=lambda x: priority.get(x, x))
     logger.info(f"Models: {models}")
     return models

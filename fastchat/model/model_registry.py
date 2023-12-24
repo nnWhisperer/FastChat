@@ -1,12 +1,12 @@
 """Additional information of the models."""
-from collections import namedtuple
+from collections import namedtuple, OrderedDict
 from typing import List
 
 
 ModelInfo = namedtuple("ModelInfo", ["simple_name", "link", "description"])
 
 
-model_info = {}
+model_info = OrderedDict()
 
 
 def register_model_info(
@@ -31,7 +31,7 @@ register_model_info(
     ["mixtral-8x7b-instruct-v0.1", "mistral-7b-instruct"],
     "Mixtral of experts",
     "https://mistral.ai/news/mixtral-of-experts/",
-    "A high quality Sparse Mixture-of-Experts by Mistral AI team",
+    "A Mixture-of-Experts model by Mistral AI",
 )
 register_model_info(
     ["gemini-pro"],
@@ -43,19 +43,19 @@ register_model_info(
     ["solar-10.7b-instruct-v1.0"],
     "SOLAR-10.7B-Instruct",
     "https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0",
-    "A Llama2 developed by upstage ai that incorporates depth up-scaling.",
-)
-register_model_info(
-    ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],
-    "GPT-3.5",
-    "https://platform.openai.com/docs/models/gpt-3-5",
-    "GPT-3.5-Turbo by OpenAI",
+    "A model trained using depth up-scaling by Upstage AI",
 )
 register_model_info(
     ["gpt-4-turbo"],
     "GPT-4-Turbo",
     "https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo",
     "GPT-4-Turbo by OpenAI",
+)
+register_model_info(
+    ["gpt-3.5-turbo", "gpt-3.5-turbo-0314", "gpt-3.5-turbo-0613", "gpt-3.5-turbo-1106"],
+    "GPT-3.5",
+    "https://platform.openai.com/docs/models/gpt-3-5",
+    "GPT-3.5-Turbo by OpenAI",
 )
 register_model_info(
     ["gpt-4", "gpt-4-0314", "gpt-4-0613"],
@@ -71,7 +71,7 @@ register_model_info(
     ["claude-1"],
     "Claude",
     "https://www.anthropic.com/index/introducing-claude",
-    "Claude by Anthropic",
+    "Claude 1 by Anthropic",
 )
 register_model_info(
     ["claude-instant-1", "claude-instant-1.2"],
@@ -101,7 +101,7 @@ register_model_info(
     ["tulu-2-dpo-70b"],
     "Tulu 2",
     "https://huggingface.co/allenai/tulu-2-dpo-70b",
-    "Tulu 2 by UW/AllenAI",
+    "an instruction and RLHF model by UW/AllenAI",
 )
 register_model_info(
     ["yi-34b-chat", "yi-6b-chat"],
