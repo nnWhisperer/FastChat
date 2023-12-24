@@ -147,7 +147,7 @@ def get_model_list(
     if add_palm:
         models += ["gemini-pro"]
     models = list(set(models))
-    #hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
+    # hidden_models = ["deluxe-chat-v1.2", "gpt-4-0613"]
     hidden_models = ["gpt-4-0613"]
     for hm in hidden_models:
         del models[models.index(hm)]
@@ -330,8 +330,9 @@ def model_worker_stream_iter(
 def is_limit_reached(model_name, ip):
     monitor_url = "http://localhost:9090"
     try:
-        ret = requests.get(f"{monitor_url}/is_limit_reached?model={model_name}&user_id={ip}",
-                           timeout=1)
+        ret = requests.get(
+            f"{monitor_url}/is_limit_reached?model={model_name}&user_id={ip}", timeout=1
+        )
         obj = ret.json()
         return obj
     except Exception as e:
@@ -339,7 +340,14 @@ def is_limit_reached(model_name, ip):
         return None
 
 
-def bot_response(state, temperature, top_p, max_new_tokens, request: gr.Request, apply_rate_limit=True):
+def bot_response(
+    state,
+    temperature,
+    top_p,
+    max_new_tokens,
+    request: gr.Request,
+    apply_rate_limit=True,
+):
     ip = get_ip(request)
     logger.info(f"bot_response. ip: {ip}")
     start_tstamp = time.time()
@@ -375,14 +383,16 @@ def bot_response(state, temperature, top_p, max_new_tokens, request: gr.Request,
             api_base=model_info["api_base"],
             api_key=model_info["api_key"],
         )
-    elif model_name in ["gpt-3.5-turbo",
-                        "gpt-3.5-turbo-0301",
-                        "gpt-3.5-turbo-0613",
-                        "gpt-3.5-turbo-1106",
-                        "gpt-4",
-                        "gpt-4-0314",
-                        "gpt-4-0613",
-                        "gpt-4-turbo"]:
+    elif model_name in [
+        "gpt-3.5-turbo",
+        "gpt-3.5-turbo-0301",
+        "gpt-3.5-turbo-0613",
+        "gpt-3.5-turbo-1106",
+        "gpt-4",
+        "gpt-4-0314",
+        "gpt-4-0613",
+        "gpt-4-turbo",
+    ]:
         # avoid conflict with Azure OpenAI
         assert model_name not in openai_compatible_models_info
         prompt = conv.to_openai_api_messages()
@@ -396,7 +406,12 @@ def bot_response(state, temperature, top_p, max_new_tokens, request: gr.Request,
         )
     elif model_name in ["palm-2", "gemini-pro"]:
         stream_iter = palm_api_stream_iter(
-            model_name, state.palm_chat, conv.messages[-2][1], temperature, top_p, max_new_tokens
+            model_name,
+            state.palm_chat,
+            conv.messages[-2][1],
+            temperature,
+            top_p,
+            max_new_tokens,
         )
     else:
         # Query worker address

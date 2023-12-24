@@ -284,9 +284,7 @@ def build_side_by_side_ui_named(models):
     model_selectors = [None] * num_sides
     chatbots = [None] * num_sides
 
-    notice = gr.Markdown(
-        notice_markdown, elem_id="notice_markdown"
-    )
+    notice = gr.Markdown(notice_markdown, elem_id="notice_markdown")
 
     with gr.Box(elem_id="share-region-named"):
         with gr.Row():

@@ -11,8 +11,9 @@ REFRESH_INTERVAL_SEC = 60
 LOG_DIR = "/home/vicuna/fastchat_logs/server0"
 # LOG_DIR = "/home/vicuna/tmp/test_env"
 
+
 class Monitor:
-    """ Monitor the number of calls to each model. """
+    """Monitor the number of calls to each model."""
 
     def __init__(self, log_dir: str):
         self.log_dir = log_dir
@@ -48,11 +49,15 @@ class Monitor:
 
             self.model_call = model_call
             self.model_call_stats_hour = self.get_model_call_stats(top_k=None)
-            self.model_call_stats_day = self.get_model_call_stats(top_k=None, most_recent_min=24*60)
+            self.model_call_stats_day = self.get_model_call_stats(
+                top_k=None, most_recent_min=24 * 60
+            )
 
             self.user_call = user_call
             self.user_call_stats_hour = self.get_user_call_stats(top_k=None)
-            self.user_call_stats_day = self.get_user_call_stats(top_k=None, most_recent_min=24*60)
+            self.user_call_stats_day = self.get_user_call_stats(
+                top_k=None, most_recent_min=24 * 60
+            )
             await asyncio.sleep(REFRESH_INTERVAL_SEC)
 
     def get_model_call_limit(self, model: str) -> int:
@@ -84,13 +89,16 @@ class Monitor:
         if model not in self.user_call_stats_day[user_id]["call_dict"]:
             return False
         # check if the user call limit is reached
-        if (self.user_call_stats_day[user_id]["call_dict"][model]
-            >= self.model_call_day_limit_per_user[model]):
+        if (
+            self.user_call_stats_day[user_id]["call_dict"][model]
+            >= self.model_call_day_limit_per_user[model]
+        ):
             return True
         return False
 
-    def get_model_call_stats(self, target_model=None,
-                             most_recent_min: int = 60, top_k: int = 20) -> dict:
+    def get_model_call_stats(
+        self, target_model=None, most_recent_min: int = 60, top_k: int = 20
+    ) -> dict:
         model_call_stats = {}
         for model, reqs in self.model_call.items():
             if target_model is not None and model != target_model:
@@ -102,14 +110,15 @@ class Monitor:
                 model_call.append(req["tstamp"])
             model_call_stats[model] = len(model_call)
         if top_k is not None:
-            top_k_model = sorted(model_call_stats,
-                                 key=lambda x: model_call_stats[x],
-                                 reverse=True)[:top_k]
+            top_k_model = sorted(
+                model_call_stats, key=lambda x: model_call_stats[x], reverse=True
+            )[:top_k]
             model_call_stats = {model: model_call_stats[model] for model in top_k_model}
         return model_call_stats
 
-    def get_user_call_stats(self, target_model=None,
-                            most_recent_min: int = 60, top_k: int = 20) -> dict:
+    def get_user_call_stats(
+        self, target_model=None, most_recent_min: int = 60, top_k: int = 20
+    ) -> dict:
         user_call_stats = {}
         for user_id, reqs in self.user_call.items():
             user_model_call = {"call_dict": {}}
@@ -126,15 +135,22 @@ class Monitor:
             if user_model_call["total_calls"] > 0:
                 user_call_stats[user_id] = user_model_call
         if top_k is not None:
-            top_k_user = sorted(user_call_stats,
-                                key=lambda x: user_call_stats[x]["total_calls"],
-                                reverse=True)[:top_k]
-            user_call_stats = {user_id: user_call_stats[user_id] for user_id in top_k_user}
+            top_k_user = sorted(
+                user_call_stats,
+                key=lambda x: user_call_stats[x]["total_calls"],
+                reverse=True,
+            )[:top_k]
+            user_call_stats = {
+                user_id: user_call_stats[user_id] for user_id in top_k_user
+            }
         return user_call_stats
 
     def get_num_users(self, most_recent_min: int = 60) -> int:
-        user_call_stats = self.get_user_call_stats(most_recent_min=most_recent_min, top_k=None)
+        user_call_stats = self.get_user_call_stats(
+            most_recent_min=most_recent_min, top_k=None
+        )
         return len(user_call_stats)
+
 
 monitor = Monitor(log_dir=LOG_DIR)
 app = FastAPI()
@@ -144,11 +160,11 @@ app = FastAPI()
 async def app_startup():
     asyncio.create_task(monitor.update_stats(2))
 
+
 @app.get("/get_model_call_limit/{model}")
 async def get_model_call_limit(model: str):
-    return {
-        "model_call_limit": {model: monitor.get_model_call_limit(model)}
-    }
+    return {"model_call_limit": {model: monitor.get_model_call_limit(model)}}
+
 
 @app.get("/update_model_call_limit/{model}/{limit}")
 async def update_model_call_limit(model: str, limit: int):
@@ -156,36 +172,45 @@ async def update_model_call_limit(model: str, limit: int):
         return {"success": False}
     return {"success": True}
 
+
 @app.get("/is_limit_reached")
 async def is_limit_reached(model: str, user_id: str):
     if monitor.is_model_limit_reached(model):
-        return {"is_limit_reached": True,
-                "reason": f"MODEL_HOURLY_LIMIT ({model}): {monitor.get_model_call_limit(model)}"}
+        return {
+            "is_limit_reached": True,
+            "reason": f"MODEL_HOURLY_LIMIT ({model}): {monitor.get_model_call_limit(model)}",
+        }
     if monitor.is_user_limit_reached(model, user_id):
-        return {"is_limit_reached": True,
-                "reason": f"USER_DAILY_LIMIT ({model}): {monitor.model_call_day_limit_per_user[model]}"}
+        return {
+            "is_limit_reached": True,
+            "reason": f"USER_DAILY_LIMIT ({model}): {monitor.model_call_day_limit_per_user[model]}",
+        }
     return {"is_limit_reached": False}
+
 
 @app.get("/get_num_users_hr")
 async def get_num_users():
-    return {
-        "num_users": len(monitor.user_call_stats_hour)
-    }
+    return {"num_users": len(monitor.user_call_stats_hour)}
+
 
 @app.get("/get_num_users_day")
 async def get_num_users_day():
-    return {
-        "num_users": len(monitor.user_call_stats_day)
-    }
+    return {"num_users": len(monitor.user_call_stats_day)}
+
 
 @app.get("/get_user_call_stats")
-async def get_user_call_stats(model: str = None, most_recent_min: int = 60, top_k: int = None):
+async def get_user_call_stats(
+    model: str = None, most_recent_min: int = 60, top_k: int = None
+):
     return {
         "user_call_stats": monitor.get_user_call_stats(model, most_recent_min, top_k)
     }
 
+
 @app.get("/get_model_call_stats")
-async def get_model_call_stats(model: str = None, most_recent_min: int = 60, top_k: int = None):
+async def get_model_call_stats(
+    model: str = None, most_recent_min: int = 60, top_k: int = None
+):
     return {
         "model_call_stats": monitor.get_model_call_stats(model, most_recent_min, top_k)
     }

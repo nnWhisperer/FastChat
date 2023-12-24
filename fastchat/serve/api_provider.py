@@ -133,7 +133,7 @@ def init_palm_chat(model_name):
 
 def palm_api_stream_iter(model_name, chat, message, temperature, top_p, max_new_tokens):
     if model_name in ["gemini-pro"]:
-        max_new_tokens = max_new_tokens*2
+        max_new_tokens = max_new_tokens * 2
     parameters = {
         "temperature": temperature,
         "top_p": top_p,
