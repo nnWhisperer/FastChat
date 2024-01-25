@@ -869,6 +869,11 @@ if __name__ == "__main__":
         type=str,
         help="Sets the gradio root path, eg /abc/def. Useful when running behind a reverse-proxy or at a custom URL path prefix",
     )
+    parser.add_argument(
+        "--api-open",
+        action="store_true",
+        help="queue's api_open to handle http requests(for colab)",
+    )
     args = parser.parse_args()
     logger.info(f"args: {args}")
 
@@ -890,7 +895,7 @@ if __name__ == "__main__":
     # Launch the demo
     demo = build_demo(models)
     demo.queue(
-        concurrency_count=args.concurrency_count, status_update_rate=10, api_open=False
+        concurrency_count=args.concurrency_count, status_update_rate=10, api_open=args.api_open
     ).launch(
         server_name=args.host,
         server_port=args.port,
