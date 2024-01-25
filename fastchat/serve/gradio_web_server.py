@@ -819,7 +819,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--concurrency-count",
         type=int,
-        default=10,
+        default=1000,
         help="The concurrency count of the gradio queue",
     )
     parser.add_argument(
@@ -894,7 +894,9 @@ if __name__ == "__main__":
 
     # Launch the demo
     demo = build_demo(models)
-    demo.launch(
+    demo.queue(
+        concurrency_count=args.concurrency_count, status_update_rate=1000, api_open=args.api_open
+    ).launch(
         server_name=args.host,
         server_port=args.port,
         share=args.share,
